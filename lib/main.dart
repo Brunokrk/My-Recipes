@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.light,
-      initialRoute:"login",
+      initialRoute:"home",
       routes: {
         "home": (context) =>  HomeScreen(),
         "login": (context) => LoginScreen(),

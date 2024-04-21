@@ -1,5 +1,11 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:my_recipes_app/common/confirmation_dialog.dart';
 import 'package:my_recipes_app/services/auth_service.dart';
+
+import '../../common/exception_dialog.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -39,7 +45,8 @@ class LoginScreen extends StatelessWidget {
                               color: Color.fromRGBO(255, 250, 221, 1))),
                     ),
                     style: const TextStyle(
-                      color: Color.fromRGBO(255, 250, 221, 1), // A cor do texto inserido
+                      color: Color.fromRGBO(
+                          255, 250, 221, 1), // A cor do texto inserido
                     ),
                     keyboardType: TextInputType.emailAddress,
                   ),
@@ -54,7 +61,8 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     style: const TextStyle(
-                      color: Color.fromRGBO(255, 250, 221, 1), // A cor do texto inserido
+                      color: Color.fromRGBO(
+                          255, 250, 221, 1), // A cor do texto inserido
                     ),
                     keyboardType: TextInputType.visiblePassword,
                     maxLength: 16,
@@ -62,9 +70,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      //TO-DO
-                      //register(context);
-                      //login(context);
+                      loginOrRegister(context);
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: const Color(0xFFFFFADD),
@@ -85,14 +91,49 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  register(BuildContext context) async {
+  loginOrRegister(BuildContext context) async {
     String email = _emailController.text;
     String password = _passController.text;
 
-    service.register(email: email, password: password).then((response) {
-      if (response) {
-        Navigator.pushReplacementNamed(context, "home");
-      }
-    });
+    service.login(email: email, password: password).then(
+      (response) {
+        if (response) {
+          //successful
+          Navigator.pushReplacementNamed(context, "home");
+        }
+      },
+    ).catchError(
+      (error) {
+        showExceptionDialog(context, content: error.message);
+      },
+      test: (error) => error is HttpException,
+    ).catchError(
+      (error) {
+        showConfirmationDialog(context,
+                affirmativeOption: "Register",
+                content:
+                    "Do you want to register a new account with the entered credentials?")
+            .then(
+          (create) {
+            if(create){
+              service.register(email: email, password: password).then((response) {
+                if (response) {
+                  Navigator.pushReplacementNamed(context, "home");
+                }
+              });
+            }
+          },
+        );
+      },
+      test: (error) => error is UserNotFindException,
+    ).catchError(
+      (error) {
+        showExceptionDialog(context,
+            content:
+                "O servidor demorou para responder, tente novamente mais tarde");
+      },
+      test: (error) => error is TimeoutException,
+    );
   }
+
 }
