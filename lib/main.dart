@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:my_recipes_app/screens/Add-Category-Screen/add_category_screen.dart';
 import 'package:my_recipes_app/screens/Home-Screen/home_screen.dart';
 import 'package:my_recipes_app/screens/Login-Screen/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,44 +19,55 @@ Future<bool> verifyToken() async {
   }else{
     return false;
   }
-
 }
 
 class MyApp extends StatelessWidget {
   final bool isLogged;
   const MyApp({super.key, required this.isLogged});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Recipes App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        //paleta primária
-        primarySwatch: Colors.grey,
+        primaryColor: const Color.fromRGBO(1, 29, 43, 1), // Cor principal da AppBar e outros elementos
+        scaffoldBackgroundColor: const Color.fromRGBO(52, 80, 94, 1), // Cor de fundo padrão dos Scaffold
         appBarTheme: const AppBarTheme(
           elevation: 0,
-          backgroundColor: Colors.black,
+          backgroundColor: Color.fromRGBO(1, 29, 43, 1),
           titleTextStyle: TextStyle(
-            color: Colors.white,
+            color: Color.fromRGBO(255, 250, 221, 1),
           ),
-          actionsIconTheme: IconThemeData(color: Colors.white),
-          iconTheme: IconThemeData(color: Colors.white),
+          actionsIconTheme: IconThemeData(color: Color.fromRGBO(255, 250, 221, 1)),
+          iconTheme: IconThemeData(color: Color.fromRGBO(255, 250, 221, 1)),
         ),
-        textTheme: GoogleFonts.bitterTextTheme(),
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(color: Color.fromRGBO(255, 250, 221, 1)),
+          bodyText2: TextStyle(color: Color.fromRGBO(255, 250, 221, 1)),
+        ).apply(bodyColor: const Color.fromRGBO(255, 250, 221, 1), displayColor: const Color.fromRGBO(255, 250, 221, 1)),
+        buttonTheme: const ButtonThemeData(
+          buttonColor: Color(0xFFDC6425), // Cor dos botões
+          textTheme: ButtonTextTheme.primary,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: const Color(0xFFDC6425),
+            onPrimary: const Color.fromRGBO(255, 250, 221, 1),
+          ),
+        ),
       ),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.light,
-      initialRoute:(isLogged)? "home":"login",
+      initialRoute: (isLogged) ? "home" : "login",
       routes: {
-        "home": (context) =>  HomeScreen(),
+        "home": (context) => const HomeScreen(),
         "login": (context) => LoginScreen(),
+        "addCategory": (context) => const AddCategoryScreen(),
       },
-      onGenerateRoute: (settings){
+      onGenerateRoute: (settings) {
         return null;
       },
     );
   }
 }
-

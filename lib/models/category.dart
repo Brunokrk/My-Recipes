@@ -1,11 +1,13 @@
 class Category {
   String catId;
   String name;
+  String urlPhoto;
  
 
   Category({
     required this.catId,
     required this.name,
+    required this.urlPhoto,
   });
 
   // Método para criar um objeto Category a partir de um Map (desserialização)
@@ -13,6 +15,7 @@ class Category {
     return Category(
       catId: map["catId"],
       name: map["name"],
+      urlPhoto: map["urlPhoto"]
     );
   }
 
@@ -21,6 +24,7 @@ class Category {
     return {
       "catId": catId,
       "name": name,
+      "urlPhoto": urlPhoto
     };
   }
 }
