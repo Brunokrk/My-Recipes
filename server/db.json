@@ -11,6 +11,21 @@
       "id": 2
     }
   ],
-  "categories": [],
+  "categories": [
+    {
+      "catId": 1,
+      "name": "Testando Categoria",
+      "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "catId": 1,
+      "name": "Testando Categoria",
+      "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
+      "userId": 1,
+      "id": 2
+    }
+  ],
   "recipes": []
 }

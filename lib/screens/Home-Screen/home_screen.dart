@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../common/logout.dart';
 import '../../models/category.dart';
+import '../../services/category_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

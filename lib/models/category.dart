@@ -1,30 +1,32 @@
+import 'package:uuid/uuid.dart';
+
 class Category {
-  String catId;
+  String id;
   String name;
   String urlPhoto;
- 
+  int userId;
 
   Category({
-    required this.catId,
+    required this.id,
     required this.name,
     required this.urlPhoto,
+    required this.userId,
   });
 
-  // Método para criar um objeto Category a partir de um Map (desserialização)
-  factory Category.fromMap(Map<String, dynamic> map) {
-    return Category(
-      catId: map["catId"],
-      name: map["name"],
-      urlPhoto: map["urlPhoto"]
-    );
-  }
+  Category.empty({required int id})
+      : id = const Uuid().v1(),
+        name = '',
+        urlPhoto = '',
+        userId = id;
 
-  // Método para converter o objeto Category em um Map (serialização)
+  Category.fromMap(Map<String, dynamic> map)
+      : id = map["id"],
+        name = map["name"],
+        urlPhoto = map["urlPhoto"],
+        userId = map["userId"];
+
+
   Map<String, dynamic> toMap() {
-    return {
-      "catId": catId,
-      "name": name,
-      "urlPhoto": urlPhoto
-    };
+    return {"id": id, "name": name, "urlPhoto": urlPhoto, "userId": userId};
   }
 }

@@ -59,7 +59,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                 onSaved: (value) => _urlPhoto = value!,
               ),
               ElevatedButton(
-                onPressed: _submitForm,
+                onPressed:(){},// _submitForm,
                 child: const Text('Salvar'),
               ),
             ],
@@ -68,17 +68,17 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       ),
     );
   }
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      _formKey.currentState!.save();
-      Category newCategory = Category(
-        catId: widget.category?.catId ?? UniqueKey().toString(),
-        name: _name,
-        urlPhoto: _urlPhoto,
-      );
-      // Implementar a lógica para adicionar ou atualizar a categoria no banco de dados
-      Navigator.pop(context, newCategory);  // Opção para retornar o objeto para uma tela anterior
-    }
-  }
+  //
+  // void _submitForm() {
+  //   if (_formKey.currentState!.validate()) {
+  //     _formKey.currentState!.save();
+  //     Category newCategory = Category(
+  //       catId: widget.category?.catId ?? UniqueKey().toString(),
+  //       name: _name,
+  //       urlPhoto: _urlPhoto,
+  //     );
+  //     // Implementar a lógica para adicionar ou atualizar a categoria no banco de dados
+  //     Navigator.pop(context, newCategory);  // Opção para retornar o objeto para uma tela anterior
+  //   }
+  // }
 }
