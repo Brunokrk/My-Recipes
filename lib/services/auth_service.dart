@@ -25,13 +25,13 @@ class AuthService {
     if(response.statusCode != 200){
       final String errorCase = json.decode(response.body);
       switch (errorCase){
-        case "Cannot Find user":
+        case "Cannot find user":
           throw UserNotFindException();
       }
       throw HttpException(response.body);
     }
 
-    //TO-DO: saveUserInfos -> salva usuário localmente
+    saveUserInfos(response.body);// -> salva usuário localmente
     return true;
   }
 
@@ -50,13 +50,21 @@ class AuthService {
       throw HttpException(response.body);
     }
 
-    //TO-DO: saveUserInfos -> salva usuário localmente
+    saveUserInfos(response.body); //-> salva usuário localmente
     return true;
   }
 
   //TO-DO
   saveUserInfos(String body)async{
-    
+    Map<String, dynamic> map = json.decode(body);
+    String token = map["accessToken"];
+    String email = map["user"]["email"];
+    int id = map["user"]["id"];
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString("accessToken", token);
+    prefs.setString("email", email);
+    prefs.setInt("id", id);
   }
 
 }

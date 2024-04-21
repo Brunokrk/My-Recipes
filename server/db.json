@@ -4,6 +4,11 @@
       "email": "teste@gmail.com",
       "password": "$2a$10$kO72iOsW5sMXLVZmQoYdgudhwO9ZyO3dYZ6PVdD5ir7QKP004veX6",
       "id": 1
+    },
+    {
+      "email": "testandoregistro@gmail.com",
+      "password": "$2a$10$2FBB8f5Y5Mi7eUmY.o220evVljPn5ZtXO7UF.R3u.F9oDDTFTOvdm",
+      "id": 2
     }
   ],
   "categories": [],

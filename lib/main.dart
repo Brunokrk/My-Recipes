@@ -2,43 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_recipes_app/screens/Home-Screen/home_screen.dart';
 import 'package:my_recipes_app/screens/Login-Screen/login_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  bool isLogged = await verifyToken();
+  runApp(MyApp(isLogged: isLogged));
+}
+
+Future<bool> verifyToken() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? token = prefs.getString("accessToken");
+  if(token != null){
+    return true;
+  }else{
+    return false;
+  }
+
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isLogged;
+  const MyApp({super.key, required this.isLogged});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Simple Journal',
+      title: 'My Recipes App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         //paleta primária
@@ -56,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.light,
-      initialRoute:"home",
+      initialRoute:(isLogged)? "home":"login",
       routes: {
         "home": (context) =>  HomeScreen(),
         "login": (context) => LoginScreen(),
@@ -67,3 +58,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
