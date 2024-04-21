@@ -1,5 +1,11 @@
 {
-  "users": [],
-  "categories":[],
+  "users": [
+    {
+      "email": "teste@gmail.com",
+      "password": "$2a$10$kO72iOsW5sMXLVZmQoYdgudhwO9ZyO3dYZ6PVdD5ir7QKP004veX6",
+      "id": 1
+    }
+  ],
+  "categories": [],
   "recipes": []
 }
