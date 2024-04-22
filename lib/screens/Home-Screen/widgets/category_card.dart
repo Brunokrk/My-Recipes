@@ -67,12 +67,18 @@ class CategoryCard extends StatelessWidget {
               child: IconButton(
                 icon: Icon(Icons.edit, color: Colors.grey),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddCategoryScreen(existingCategory: category),
-                    ),
-                  );
+                  Map<String, dynamic> map ={};
+                  map["category"] = category;
+                  Navigator.pushNamed(context, 'add-category', arguments: map).then((value){
+                    refreshFunction();
+                    if(value!=null && value == true){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Alteração Feita com Sucesso!"),
+                        ),
+                      );
+                    }
+                  });
                 },
               ),
             ),

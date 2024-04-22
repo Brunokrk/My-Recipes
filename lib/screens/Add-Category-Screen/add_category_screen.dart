@@ -16,7 +16,7 @@ class AddCategoryScreen extends StatelessWidget {
 
   AddCategoryScreen({
     super.key,
-    this.existingCategory,
+    this.existingCategory
   }) {
     if (existingCategory != null) {
       _name.text = existingCategory!.name;
@@ -141,10 +141,7 @@ class AddCategoryScreen extends StatelessWidget {
               showExceptionDialog(context, content: error.message);
             }, test: (error) => error is HttpException);
           }else{
-            print("olá");
-            // service.update(category, token).then((response) {
-            //   Navigator.pop(context, response);
-            // });
+            service.update(category.id,category, token).then((response){Navigator.pop(context, response);},);
           }
         }
       },

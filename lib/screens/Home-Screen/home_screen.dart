@@ -78,7 +78,16 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, 'add-category');
+          Navigator.pushNamed(context, 'add-category').then((value) {
+            refresh();
+            if(value!=null && value == true){
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Registro Feito com Sucesso!"),
+                ),
+              );
+            }
+          });
         },
         backgroundColor: const Color(0xFFDC6425),
         child: const Icon(

@@ -5,6 +5,8 @@ import 'package:my_recipes_app/screens/Home-Screen/home_screen.dart';
 import 'package:my_recipes_app/screens/Login-Screen/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'models/category.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   bool isLogged = await verifyToken();
@@ -73,9 +75,18 @@ class MyApp extends StatelessWidget {
       },
       onGenerateRoute: (settings) {
         if (settings.name == "add-category") {
-          return MaterialPageRoute(builder: (context) {
-            return AddCategoryScreen();
-          });
+          if(settings.arguments != null){
+            Map<String, dynamic> map = settings.arguments as Map<String, dynamic>;
+            final Category category = map["category"] as Category;
+            return MaterialPageRoute(builder: (context) {
+              return AddCategoryScreen(existingCategory: category,);
+            });
+          }else{
+            return MaterialPageRoute(builder: (context){
+              return AddCategoryScreen();
+            });
+          }
+
         }
       },
     );

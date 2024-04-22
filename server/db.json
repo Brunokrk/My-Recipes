@@ -14,7 +14,7 @@
   "categories": [
     {
       "id": "fa310560-00d7-11ef-9f9f-d98ade6570e4",
-      "name": "Testando Registro",
+      "name": "Testando Alteracao 2",
       "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
       "userId": 1
     },
@@ -29,6 +29,24 @@
       "name": "Categoria User 2",
       "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
       "userId": 2
+    },
+    {
+      "id": "79f69d80-00e9-11ef-a3db-e5e4627215f9",
+      "name": "Bolos",
+      "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
+      "userId": 1
+    },
+    {
+      "id": "57aeb770-00ea-11ef-b125-892d26638e2b",
+      "name": "Teste ScaffMess and Updt",
+      "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
+      "userId": 1
+    },
+    {
+      "id": "71240cf0-00ea-11ef-b125-892d26638e2b",
+      "name": "Teste Refresh()",
+      "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
+      "userId": 1
     }
   ],
   "recipes": []
