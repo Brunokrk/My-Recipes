@@ -20,7 +20,7 @@ class Category {
         userId = id;
 
   Category.fromMap(Map<String, dynamic> map)
-      : id = map["id"],
+      : id = map["id"].toString(),
         name = map["name"],
         urlPhoto = map["urlPhoto"],
         userId = map["userId"];

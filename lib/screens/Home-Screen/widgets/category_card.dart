@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import '../../../models/category.dart';
 
 class CategoryCard extends StatelessWidget {
-  final String urlPhoto;
-  final String name;
-  final VoidCallback onTap;
+  final Category category;
+  final Function refreshFunction;
+  final int userId;
+  final String token;
 
   const CategoryCard({
     Key? key,
-    required this.urlPhoto,
-    required this.name,
-    required this.onTap,
+    required this.category,
+    required this.refreshFunction,
+    required this.userId,
+    required this.token,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap, // Adicionando o callback de toque
       child: Card(
         color: Colors.white, // Definindo a cor de fundo do card como branco
         shape: RoundedRectangleBorder(
@@ -31,7 +33,7 @@ class CategoryCard extends StatelessWidget {
                   bottomLeft: Radius.circular(20.0),
                 ),
                 child: Image.network(
-                  urlPhoto,
+                  category!.urlPhoto,
                   height: 100,
                   fit: BoxFit.cover,
                 ),
@@ -46,11 +48,12 @@ class CategoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      name,
+                      category!.name,
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black, // Definindo a cor do texto como preto
+                        color:
+                            Colors.black, // Definindo a cor do texto como preto
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -63,4 +66,6 @@ class CategoryCard extends StatelessWidget {
       ),
     );
   }
+  //TODO: Remove Category
+
 }

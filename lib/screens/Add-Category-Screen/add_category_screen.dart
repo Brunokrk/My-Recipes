@@ -1,66 +1,69 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../models/category.dart';
 
-class AddCategoryScreen extends StatefulWidget {
-  final Category? category;
+class AddCategoryScreen extends StatelessWidget {
+  AddCategoryScreen({super.key});
 
-  const AddCategoryScreen({Key? key, this.category}) : super(key: key);
-
-  @override
-  _AddCategoryScreenState createState() => _AddCategoryScreenState();
-}
-
-class _AddCategoryScreenState extends State<AddCategoryScreen> {
-  final _formKey = GlobalKey<FormState>();
-  late String _name;
-  late String _urlPhoto;
-
-  @override
-  void initState() {
-    super.initState();
-    _name = widget.category?.name ?? '';
-    _urlPhoto = widget.category?.urlPhoto ?? '';
-  }
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _url = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.category == null ? 'Adicionar Categoria' : 'Editar Categoria'),
+        title:const Text(
+          "New Category",
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white, // Alterado para branco puro
+          ),
+        ),
+        centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: Form(
-          key: _formKey,
+          //key: _formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TextFormField(
-                initialValue: _name,
-                decoration: InputDecoration(
+                controller: _name,
+
+                decoration: const InputDecoration(
                   labelText: 'Nome da Categoria',
                   labelStyle: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,  // Cor do texto em branco
+                    color: Colors.white, // Cor do texto em branco
                   ),
                 ),
-                validator: (value) => value!.isEmpty ? 'Este campo não pode estar vazio' : null,
-                onSaved: (value) => _name = value!,
               ),
               TextFormField(
-                initialValue: _urlPhoto,
-                decoration: InputDecoration(
-                  labelText: 'URL da Foto',
+                controller: _url,
+                decoration: const InputDecoration(
+                  labelText: 'Url da imagem',
                   labelStyle: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,  // Cor do texto em branco
+                    color: Colors.white, // Cor do texto em branco
                   ),
                 ),
-                validator: (value) => value!.isEmpty ? 'Este campo não pode estar vazio' : null,
-                onSaved: (value) => _urlPhoto = value!,
               ),
-              ElevatedButton(
-                onPressed:(){},// _submitForm,
-                child: const Text('Salvar'),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                child: ElevatedButton(
+                  onPressed:(){},// _submitForm,
+                  child: const Text(
+                    "Create",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white, // Alterado para branco puro
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -68,17 +71,18 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       ),
     );
   }
-  //
-  // void _submitForm() {
-  //   if (_formKey.currentState!.validate()) {
-  //     _formKey.currentState!.save();
-  //     Category newCategory = Category(
-  //       catId: widget.category?.catId ?? UniqueKey().toString(),
-  //       name: _name,
-  //       urlPhoto: _urlPhoto,
-  //     );
-  //     // Implementar a lógica para adicionar ou atualizar a categoria no banco de dados
-  //     Navigator.pop(context, newCategory);  // Opção para retornar o objeto para uma tela anterior
-  //   }
-  // }
+
+
+  registerCategory(BuildContext context){
+    SharedPreferences.getInstance().then((prefs) {
+      String? token = prefs.getString("accessToken");
+      if(token != null){
+        String name = _name.text;
+        String url = _url.text;
+
+      }
+    });
+
+  }
+
 }

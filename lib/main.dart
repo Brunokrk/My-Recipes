@@ -63,10 +63,14 @@ class MyApp extends StatelessWidget {
       routes: {
         "home": (context) => const HomeScreen(),
         "login": (context) => LoginScreen(),
-        "addCategory": (context) => const AddCategoryScreen(),
+        //"addCategory": (context) => const AddCategoryScreen(),
       },
       onGenerateRoute: (settings) {
-        return null;
+        if (settings.name == "add-category"){
+          return MaterialPageRoute(builder: (context){
+            return AddCategoryScreen();
+          });
+        }
       },
     );
   }

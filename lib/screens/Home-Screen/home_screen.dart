@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:my_recipes_app/screens/Home-Screen/widgets/category_card.dart';
+import 'package:my_recipes_app/screens/Home-Screen/widgets/listing_categories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
+import '../../common/exception_dialog.dart';
 import '../../common/logout.dart';
 import '../../models/category.dart';
 import '../../services/category_service.dart';
@@ -17,12 +22,28 @@ class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _listScrollController = ScrollController();
   final CategoryService catService = CategoryService();
 
+  int? userId;
+  String? userToken;
+
   Map<String, Category> database = {};
+
+  @override
+  void initState() {
+    refresh();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                refresh();
+              },
+              icon: const Icon(Icons.refresh))
+        ],
         title: const Text(
           "My Categories",
           style: TextStyle(
@@ -47,27 +68,17 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: Container(
-        color: const Color.fromRGBO(52, 80, 94, 1),
-        child: ListView(
-          controller: _listScrollController,
-          children: [
-            CategoryCard(
-                urlPhoto:
-                    "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
-                name: "Categoria Teste",
-                onTap: () {}),
-            CategoryCard(
-                urlPhoto:
-                    "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
-                name: "Categoria Teste",
-                onTap: () {}), // TODO: lista de categorias aqui!
-          ],
-        ),
-      ),
+      body: (userId != null && userToken != null)
+          ? ListView(
+              controller: _listScrollController,
+              children: generateListCategories(userId: userId!, token: userToken!, refreshFunction: refresh, database: database),
+            )
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed("addCategory");
+          Navigator.pushNamed(context, 'add-category');
         },
         backgroundColor: const Color(0xFFDC6425),
         child: const Icon(
@@ -80,12 +91,39 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // TO-DO refresh function
   void refresh() async {
-    SharedPreferences.getInstance().then((prefs) {
-      String? token = prefs.getString("accessToken");
-      String? email = prefs.getString("email");
-      int? id = prefs.getInt("id");
+    SharedPreferences.getInstance().then(
+      (prefs) {
+        String? token = prefs.getString("accessToken");
+        String? email = prefs.getString("email");
+        int? id = prefs.getInt("id");
 
-      // TO-DO: tratar erros.
-    });
+        if (token != null && email != null && id != null) {
+          setState(() {
+            userId = id;
+            userToken = token;
+          });
+
+          catService.getAll(userId: id.toString(), token: token).then(
+            (List<Category> listCats) {
+              setState(() {
+                database = {};
+                for (Category category in listCats) {
+                  database[category.id] = category;
+                }
+              });
+            },
+          );
+        } else {
+          Navigator.pushReplacementNamed(context, "login");
+        }
+      },
+    ).catchError(
+      (error) {
+        logout(context);
+      },
+      test: (error) => error is TokenNotValidException,
+    ).catchError((error) {
+      showExceptionDialog(context, content: error.message);
+    }, test: (error) => error is HttpException);
   }
 }
