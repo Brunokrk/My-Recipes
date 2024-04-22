@@ -14,15 +14,16 @@ void main() async {
 Future<bool> verifyToken() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString("accessToken");
-  if(token != null){
+  if (token != null) {
     return true;
-  }else{
+  } else {
     return false;
   }
 }
 
 class MyApp extends StatelessWidget {
   final bool isLogged;
+
   const MyApp({super.key, required this.isLogged});
 
   @override
@@ -31,21 +32,26 @@ class MyApp extends StatelessWidget {
       title: 'My Recipes App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: const Color.fromRGBO(1, 29, 43, 1), // Cor principal da AppBar e outros elementos
-        scaffoldBackgroundColor: const Color.fromRGBO(52, 80, 94, 1), // Cor de fundo padrão dos Scaffold
+        primaryColor: const Color.fromRGBO(1, 29, 43, 1),
+        // Cor principal da AppBar e outros elementos
+        scaffoldBackgroundColor: const Color.fromRGBO(52, 80, 94, 1),
+        // Cor de fundo padrão dos Scaffold
         appBarTheme: const AppBarTheme(
           elevation: 0,
           backgroundColor: Color.fromRGBO(1, 29, 43, 1),
           titleTextStyle: TextStyle(
             color: Color.fromRGBO(255, 250, 221, 1),
           ),
-          actionsIconTheme: IconThemeData(color: Color.fromRGBO(255, 250, 221, 1)),
+          actionsIconTheme:
+              IconThemeData(color: Color.fromRGBO(255, 250, 221, 1)),
           iconTheme: IconThemeData(color: Color.fromRGBO(255, 250, 221, 1)),
         ),
         textTheme: const TextTheme(
           bodyText1: TextStyle(color: Color.fromRGBO(255, 250, 221, 1)),
           bodyText2: TextStyle(color: Color.fromRGBO(255, 250, 221, 1)),
-        ).apply(bodyColor: const Color.fromRGBO(255, 250, 221, 1), displayColor: const Color.fromRGBO(255, 250, 221, 1)),
+        ).apply(
+            bodyColor: const Color.fromRGBO(255, 250, 221, 1),
+            displayColor: const Color.fromRGBO(255, 250, 221, 1)),
         buttonTheme: const ButtonThemeData(
           buttonColor: Color(0xFFDC6425), // Cor dos botões
           textTheme: ButtonTextTheme.primary,
@@ -66,8 +72,8 @@ class MyApp extends StatelessWidget {
         //"addCategory": (context) => const AddCategoryScreen(),
       },
       onGenerateRoute: (settings) {
-        if (settings.name == "add-category"){
-          return MaterialPageRoute(builder: (context){
+        if (settings.name == "add-category") {
+          return MaterialPageRoute(builder: (context) {
             return AddCategoryScreen();
           });
         }

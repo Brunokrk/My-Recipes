@@ -1,6 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:my_recipes_app/services/category_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
+
+import '../../common/exception_dialog.dart';
+import '../../common/logout.dart';
 import '../../models/category.dart';
 
 class AddCategoryScreen extends StatelessWidget {
@@ -9,11 +15,12 @@ class AddCategoryScreen extends StatelessWidget {
   final TextEditingController _name = TextEditingController();
   final TextEditingController _url = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:const Text(
+        title: const Text(
           "New Category",
           style: TextStyle(
             fontSize: 20,
@@ -26,63 +33,102 @@ class AddCategoryScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Form(
-          //key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              TextFormField(
-                controller: _name,
-
-                decoration: const InputDecoration(
-                  labelText: 'Nome da Categoria',
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white, // Cor do texto em branco
+          child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.white,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: TextFormField(
+                          controller: _name,
+                          decoration: InputDecoration(
+                            labelText: 'Nome da Categoria',
+                            labelStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 25,
+                            ),
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            floatingLabelAlignment:
+                                FloatingLabelAlignment.center,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: TextFormField(
+                          controller: _url,
+                          decoration: InputDecoration(
+                            labelText: 'Url da Imagem',
+                            labelStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 25,
+                            ),
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            floatingLabelAlignment:
+                                FloatingLabelAlignment.center,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-              TextFormField(
-                controller: _url,
-                decoration: const InputDecoration(
-                  labelText: 'Url da imagem',
-                  labelStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white, // Cor do texto em branco
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                child: ElevatedButton(
-                  onPressed:(){},// _submitForm,
-                  child: const Text(
-                    "Create",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white, // Alterado para branco puro
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      registerCategory(context);
+                    }, // Adicione sua função de envio aqui
+                    child: const Text(
+                      "Create",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
+  registerCategory(BuildContext context) {
+    SharedPreferences.getInstance().then(
+      (prefs) {
+        String? token = prefs.getString("accessToken");
+        if (token != null) {
+          Category category = Category.empty(userIdd: prefs.getInt("id")!);
+          category.name = _name.text;
+          category.urlPhoto = _url.text;
 
-  registerCategory(BuildContext context){
-    SharedPreferences.getInstance().then((prefs) {
-      String? token = prefs.getString("accessToken");
-      if(token != null){
-        String name = _name.text;
-        String url = _url.text;
-
-      }
-    });
-
+          CategoryService service = CategoryService();
+          service.register(category, token).then((response) {
+            Navigator.pop(context, response);
+          }).catchError(
+            (error) {
+              logout(context);
+            },
+            test: (error) => error is TokenNotValidException,
+          ).catchError((error) {
+            showExceptionDialog(context, content: error.message);
+          }, test: (error) => error is HttpException);
+        }
+      },
+    );
   }
-
 }

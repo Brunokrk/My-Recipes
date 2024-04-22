@@ -8,7 +8,7 @@ List<CategoryCard> generateListCategories(
     required int userId,
     required String token}) {
 
-  print('entrou aqui');
+  //print('entrou aqui');
   List<CategoryCard> list = [];
   database.forEach((id, category) {
     list.add(CategoryCard(

@@ -13,11 +13,11 @@ class Category {
     required this.userId,
   });
 
-  Category.empty({required int id})
+  Category.empty({required int userIdd})
       : id = const Uuid().v1(),
         name = '',
         urlPhoto = '',
-        userId = id;
+        userId = userIdd;
 
   Category.fromMap(Map<String, dynamic> map)
       : id = map["id"].toString(),
