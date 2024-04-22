@@ -10,11 +10,19 @@ import '../../common/logout.dart';
 import '../../models/category.dart';
 
 class AddCategoryScreen extends StatelessWidget {
-  AddCategoryScreen({super.key});
-
+  final Category? existingCategory;
   final TextEditingController _name = TextEditingController();
   final TextEditingController _url = TextEditingController();
 
+  AddCategoryScreen({
+    super.key,
+    this.existingCategory,
+  }) {
+    if (existingCategory != null) {
+      _name.text = existingCategory!.name;
+      _url.text = existingCategory!.urlPhoto;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +58,7 @@ class AddCategoryScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         child: TextFormField(
                           controller: _name,
+                          style: const TextStyle(color:Colors.black),
                           decoration: InputDecoration(
                             labelText: 'Nome da Categoria',
                             labelStyle: const TextStyle(
@@ -67,6 +76,7 @@ class AddCategoryScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(16.0),
                         child: TextFormField(
                           controller: _url,
+                          style: const TextStyle(color:Colors.black),
                           decoration: InputDecoration(
                             labelText: 'Url da Imagem',
                             labelStyle: const TextStyle(
@@ -87,10 +97,10 @@ class AddCategoryScreen extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
                   child: ElevatedButton(
                     onPressed: () {
-                      registerCategory(context);
+                      registerOrUpdateCategory(context);
                     }, // Adicione sua função de envio aqui
                     child: const Text(
-                      "Create",
+                       "Create",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -107,26 +117,35 @@ class AddCategoryScreen extends StatelessWidget {
     );
   }
 
-  registerCategory(BuildContext context) {
+  registerOrUpdateCategory(BuildContext context) {
     SharedPreferences.getInstance().then(
       (prefs) {
         String? token = prefs.getString("accessToken");
         if (token != null) {
-          Category category = Category.empty(userIdd: prefs.getInt("id")!);
+          int userId = prefs.getInt("id")!;
+          Category category =
+              existingCategory ?? Category.empty(userIdd: userId);
           category.name = _name.text;
           category.urlPhoto = _url.text;
 
           CategoryService service = CategoryService();
-          service.register(category, token).then((response) {
-            Navigator.pop(context, response);
-          }).catchError(
-            (error) {
-              logout(context);
-            },
-            test: (error) => error is TokenNotValidException,
-          ).catchError((error) {
-            showExceptionDialog(context, content: error.message);
-          }, test: (error) => error is HttpException);
+          if (existingCategory == null) {
+            service.register(category, token).then((response) {
+              Navigator.pop(context, response);
+            }).catchError(
+              (error) {
+                logout(context);
+              },
+              test: (error) => error is TokenNotValidException,
+            ).catchError((error) {
+              showExceptionDialog(context, content: error.message);
+            }, test: (error) => error is HttpException);
+          }else{
+            print("olá");
+            // service.update(category, token).then((response) {
+            //   Navigator.pop(context, response);
+            // });
+          }
         }
       },
     );

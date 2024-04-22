@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../models/category.dart';
+import '../../Add-Category-Screen/add_category_screen.dart';
 
 class CategoryCard extends StatelessWidget {
   final Category category;
@@ -18,8 +19,9 @@ class CategoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: () {},  // Adicione aqui a ação desejada para quando o card for tocado.
       child: Card(
-        color: Colors.white, // Definindo a cor de fundo do card como branco
+        color: Colors.white,  // Definindo a cor de fundo do card como branco
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
@@ -33,14 +35,14 @@ class CategoryCard extends StatelessWidget {
                   bottomLeft: Radius.circular(20.0),
                 ),
                 child: Image.network(
-                  category!.urlPhoto,
+                  category.urlPhoto,
                   height: 100,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -48,12 +50,11 @@ class CategoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      category!.name,
+                      category.name,
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
-                        color:
-                            Colors.black, // Definindo a cor do texto como preto
+                        color: Colors.black,  // Definindo a cor do texto como preto
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -61,11 +62,25 @@ class CategoryCard extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: IconButton(
+                icon: Icon(Icons.edit, color: Colors.grey),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddCategoryScreen(existingCategory: category),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-  //TODO: Remove Category
 
+//TODO: Remove Category
 }
