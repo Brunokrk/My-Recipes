@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
-import '../../../models/category.dart';
-import '../../Add-Category-Screen/add_category_screen.dart';
+import '../../../models/recipe.dart';
 
-class CategoryCard extends StatelessWidget {
-  final Category category;
+class RecipeCard extends StatelessWidget {
+  final Recipe recipe;
   final Function refreshFunction;
   final int userId;
   final String token;
 
-  const CategoryCard({
-    Key? key,
-    required this.category,
-    required this.refreshFunction,
-    required this.userId,
-    required this.token,
-  }) : super(key: key);
-
-  //TODO: Altura do card está dimensionada a partir do tamanho da imagem.
+  const RecipeCard(
+      {super.key,
+      required this.recipe,
+      required this.refreshFunction,
+      required this.userId,
+      required this.token});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onCardTap(context, category);
-      },  // Adicione aqui a ação desejada para quando o card for tocado.
+        //TODO: onCardTap(context, recipe); //-> Abre a receita para visualização
+      },
       child: Card(
-        color: Colors.white,  // Definindo a cor de fundo do card como branco
+        color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
@@ -39,7 +35,7 @@ class CategoryCard extends StatelessWidget {
                   bottomLeft: Radius.circular(20.0),
                 ),
                 child: Image.network(
-                  category.urlPhoto,
+                  recipe.photoUrl,
                   height: 100,
                   fit: BoxFit.cover,
                 ),
@@ -54,13 +50,23 @@ class CategoryCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      category.name,
+                      recipe.name,
                       style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,  // Definindo a cor do texto como preto
                       ),
                       overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),  // Espaço entre o nome e a descrição
+                    Text(
+                      recipe.description,  // Usando a propriedade 'description' do objeto recipe
+                      style: TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.black.withOpacity(0.6), // Opacidade reduzida
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,  // Limitando o número de linhas
                     ),
                   ],
                 ),
@@ -71,18 +77,7 @@ class CategoryCard extends StatelessWidget {
               child: IconButton(
                 icon: Icon(Icons.edit, color: Colors.grey),
                 onPressed: () {
-                  Map<String, dynamic> map ={};
-                  map["category"] = category;
-                  Navigator.pushNamed(context, 'add-category', arguments: map).then((value){
-                    refreshFunction();
-                    if(value!=null && value == true){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Alteração Feita com Sucesso!"),
-                        ),
-                      );
-                    }
-                  });
+                  //TODO: update recipe
                 },
               ),
             ),
@@ -91,12 +86,4 @@ class CategoryCard extends StatelessWidget {
       ),
     );
   }
-
-  onCardTap(BuildContext context, Category category){
-    Map<String, dynamic> map = {};
-    map['category'] = category;
-    Navigator.pushNamed(context, 'category-screen', arguments: map);
-  }
-
-//TODO: Remove Category -> Envolve remover também todas as receitas!!!
 }

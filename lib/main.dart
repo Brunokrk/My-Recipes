@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_recipes_app/screens/Add-Category-Screen/add_category_screen.dart';
+import 'package:my_recipes_app/screens/Category-Screen/category_screen.dart';
 import 'package:my_recipes_app/screens/Home-Screen/home_screen.dart';
 import 'package:my_recipes_app/screens/Login-Screen/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,7 +72,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "home": (context) => const HomeScreen(),
         "login": (context) => LoginScreen(),
-        //"addCategory": (context) => const AddCategoryScreen(),
+        //"category-screen": (context) => CategoryScreen(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == "add-category") {
@@ -86,8 +87,16 @@ class MyApp extends StatelessWidget {
               return AddCategoryScreen();
             });
           }
-
+        }else if(settings.name == "category-screen"){
+          if(settings.arguments != null){
+            Map<String, dynamic> map = settings.arguments as Map<String, dynamic>;
+            final Category category = map["category"] as Category;
+            return MaterialPageRoute(builder: (context) {
+              return CategoryScreen(innerCategory: category,);
+            });
+          }
         }
+        return null;
       },
     );
   }

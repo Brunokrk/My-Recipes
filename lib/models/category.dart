@@ -29,4 +29,10 @@ class Category {
   Map<String, dynamic> toMap() {
     return {"id": id, "name": name, "urlPhoto": urlPhoto, "userId": userId};
   }
+
+  @override
+  String toString() {
+    return 'Category(id: $id, name: $name, urlPhoto: $urlPhoto, userId: $userId)';
+  }
+
 }
