@@ -78,7 +78,7 @@ class CategoryService {
     return list;
   }
 
-//TODO: EDIT
+//TODO: delete
 }
 
 class TokenNotValidException implements Exception {}

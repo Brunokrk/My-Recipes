@@ -1,11 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:my_recipes_app/screens/Home-Screen/widgets/category_card.dart';
 import 'package:my_recipes_app/screens/Home-Screen/widgets/listing_categories.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uuid/uuid.dart';
-
 import '../../common/exception_dialog.dart';
 import '../../common/logout.dart';
 import '../../models/category.dart';

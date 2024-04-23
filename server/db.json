@@ -49,5 +49,37 @@
       "userId": 1
     }
   ],
-  "recipes": []
+  "recipes": [
+    {
+      "name": "Bolo de Fubá",
+      "photoUrl": "https://s2-receitas.glbimg.com/5rvytTYCmTaPYu8yCsaya0GaA08=/0x0:1000x667/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_1f540e0b94d8437dbbc39d567a1dee68/internal_photos/bs/2022/Q/C/2DeqRTSI2oR5wVBFVVOw/delicious-cornmeal-cake-traditional-brazilian-cake.jpg",
+      "description": "Uma receita para testar requisições",
+      "catId": "79f69d80-00e9-11ef-a3db-e5e4627215f9",
+      "userId": "1",
+      "ingredients": [
+        {
+          "id": "12a",
+          "name": "Fubá",
+          "quantity": "200 gramas",
+          "obs": "Bater muito bem"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "name": "Bolo de Fubá",
+      "photoUrl": "https://s2-receitas.glbimg.com/5rvytTYCmTaPYu8yCsaya0GaA08=/0x0:1000x667/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_1f540e0b94d8437dbbc39d567a1dee68/internal_photos/bs/2022/Q/C/2DeqRTSI2oR5wVBFVVOw/delicious-cornmeal-cake-traditional-brazilian-cake.jpg",
+      "description": "Uma receita para testar requisições",
+      "catId": "79f69d80-00e9-11ef-a3db-e5e4627215f9",
+      "userId": "1",
+      "ingredients": [
+        {
+          "name": "Fubá",
+          "quantity": "200 gramas",
+          "obs": "Bater muito bem"
+        }
+      ],
+      "id": 2
+    }
+  ]
 }
