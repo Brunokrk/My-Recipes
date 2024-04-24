@@ -6,7 +6,7 @@ class Recipe{
   String photoUrl;
   String description;
   int userId;
-  int catId;
+  String catId;
   List<Ingredient> ingredients = [];
 
   Recipe({
@@ -19,11 +19,11 @@ class Recipe{
   });
 
   Recipe.fromMap(Map<String, dynamic> map)
-      : id = map["id"],
+      : id = map["id"].toString(),
         name = map["name"],
         photoUrl = map["photoUrl"],
         description = map["description"],
-        catId = map["catId"],
+        catId = map["catId"].toString(),
         userId = map['userId'],
         ingredients = (map["ingredients"] as List).map((item) => Ingredient.fromMap(item)).toList();
 

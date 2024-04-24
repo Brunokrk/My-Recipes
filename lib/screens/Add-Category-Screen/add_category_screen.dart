@@ -59,9 +59,9 @@ class AddCategoryScreen extends StatelessWidget {
                         child: TextFormField(
                           controller: _name,
                           style: const TextStyle(color:Colors.black),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Nome da Categoria',
-                            labelStyle: const TextStyle(
+                            labelStyle: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                               fontSize: 25,
@@ -77,9 +77,9 @@ class AddCategoryScreen extends StatelessWidget {
                         child: TextFormField(
                           controller: _url,
                           style: const TextStyle(color:Colors.black),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Url da Imagem',
-                            labelStyle: const TextStyle(
+                            labelStyle: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                               fontSize: 25,

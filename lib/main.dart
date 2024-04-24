@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_recipes_app/screens/Add-Category-Screen/add_category_screen.dart';
+import 'package:my_recipes_app/screens/Add-Recipe-Screen/add_recipe_screen.dart';
 import 'package:my_recipes_app/screens/Category-Screen/category_screen.dart';
 import 'package:my_recipes_app/screens/Home-Screen/home_screen.dart';
 import 'package:my_recipes_app/screens/Login-Screen/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/category.dart';
+import 'models/recipe.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -93,6 +95,18 @@ class MyApp extends StatelessWidget {
             final Category category = map["category"] as Category;
             return MaterialPageRoute(builder: (context) {
               return CategoryScreen(innerCategory: category,);
+            });
+          }
+        }else if(settings.name == "add-recipe"){
+          if(settings.arguments != null){
+            Map<String,dynamic> map = settings.arguments as Map<String, dynamic>;
+            final Recipe recipe = map["recipe"] as Recipe;
+            return MaterialPageRoute(builder: (context) {
+              return AddRecipeScreen(existingRecipe: recipe,);
+            });
+          }else{
+            return MaterialPageRoute(builder: (context){
+              return AddRecipeScreen();
             });
           }
         }
