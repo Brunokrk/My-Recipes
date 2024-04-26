@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int? userId;
   String? userToken;
+  int? selectedForDeletionId;
 
   Map<String, Category> database = {};
 
