@@ -1,8 +1,11 @@
 import 'package:my_recipes_app/models/category.dart';
+import 'package:my_recipes_app/services/recipe_service.dart';
 import 'package:my_recipes_app/services/web_client.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
+
+import '../models/recipe.dart';
 
 class CategoryService {
   String url = WebClient.url;
@@ -44,8 +47,8 @@ class CategoryService {
       body: jsonCat,
     );
 
-    if(response.statusCode !=200){
-      if(json.decode(response.body) == "jwt expired"){
+    if (response.statusCode != 200) {
+      if (json.decode(response.body) == "jwt expired") {
         throw TokenNotValidException();
       }
       throw HttpException(response.body);
@@ -78,7 +81,31 @@ class CategoryService {
     return list;
   }
 
-//TODO: delete
+  Future<bool> delete(String userId, Category category, String token) async {
+    //Primeiro buscar todas as receitas daquela categoria.
+    print("Aqui");
+    RecipeService recService = RecipeService();
+    recService.getAll(userId: userId, token: token, cat: category).then((
+        recipes) {
+      print(recipes);
+      for (Recipe recipe in recipes) {
+        //exclui todas as receitas da categoria
+        recService.delete(recipe.id, recipe, token);
+      }
+    });
+
+    String catId = category.id;
+    http.Response response = await client.delete(
+        Uri.parse("${getUrl()}$catId"),headers:{"Authorization": "Bearer $token"});
+    if (response.statusCode != 200) {
+      if(json.decode(response.body) == "jwt expired"){
+        throw TokenNotValidException();
+      }
+      throw HttpException(response.body);
+    }
+    return true;
+  }
+
 }
 
 class TokenNotValidException implements Exception {}

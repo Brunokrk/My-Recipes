@@ -1,4 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:my_recipes_app/common/remove_confirmation_dialog.dart';
+import 'package:my_recipes_app/services/recipe_service.dart';
+import '../../../common/exception_dialog.dart';
+import '../../../common/logout.dart';
 import '../../../models/recipe.dart';
 
 class RecipeCard extends StatelessWidget {
@@ -20,6 +26,7 @@ class RecipeCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
+        onLongPress: () {removeRecipe(context);},
         onTap: () {
           onCardTap(context, recipe); // Abre a receita para visualização
         },
@@ -108,4 +115,37 @@ class RecipeCard extends StatelessWidget {
     map['recipe'] = recipe;
     Navigator.pushNamed(context, 'recipe-screen', arguments: map);
   }
+
+  removeRecipe(context) {
+    RecipeService service = RecipeService();
+    if (recipe != null) {
+      showConfirmationDialog(
+        context,
+        content: "Deseja realmente excluir a receita de  ${recipe.name}?",
+        affirmativeOption: "Excluir",
+        textStyle: TextStyle(color: Colors.black),
+      ).then((value) {
+        if (value != null) {
+          if (value) {
+            service.delete(recipe.id, recipe, token).then((value) {
+              if (value) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Item deletado com sucesso")));
+                refreshFunction();
+              }
+            });
+          }
+        }
+      }).catchError(
+        (error) {
+          logout(context);
+        },
+        test: (error) => error is TokenNotValidException,
+      ).catchError((error) {
+        showExceptionDialog(context, content: error.message);
+      }, test: (error) => error is HttpException);
+    }
+  }
 }
+
+

@@ -20,8 +20,10 @@ class RecipeService {
     String jsonRecipe = json.encode(recipe.toMap());
     http.Response response = await client.post(
       Uri.parse(getUrl()),
-      headers: {'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token'
+      },
       body: jsonRecipe,
     );
 
@@ -34,7 +36,10 @@ class RecipeService {
     return true;
   }
 
-  Future<List<Recipe>> getAll({required String userId, required String token, required Category cat}) async{
+  Future<List<Recipe>> getAll(
+      {required String userId,
+      required String token,
+      required Category cat}) async {
     //filtra por categoria
     http.Response response = await client.get(
       Uri.parse("${url}users/$userId/recipes?catId=${cat.id}"),
@@ -57,28 +62,37 @@ class RecipeService {
     return list;
   }
 
-Future<bool> update(String id, Recipe recipe, String token) async{
+  Future<bool> update(String id, Recipe recipe, String token) async {
     String jsonRec = json.encode(recipe.toMap());
     http.Response response = await client.put(
       Uri.parse("${getUrl()}$id"),
-      headers: {'Content-Type': 'application/json',
-        "Authorization": "Bearer $token",},
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer $token",
+      },
       body: jsonRec,
     );
 
-    if(response.statusCode !=200){
-      if(json.decode(response.body) == "jwt expired"){
+    if (response.statusCode != 200) {
+      if (json.decode(response.body) == "jwt expired") {
         throw TokenNotValidException();
       }
       throw HttpException(response.body);
     }
 
     return true;
-}
+  }
 
-
-//TODO: delete
+  Future<bool> delete(String id, Recipe recipe, String token) async {
+    http.Response response = await client.delete(Uri.parse("${getUrl()}$id"), headers: {"Authorization": "Bearer $token"});
+    if (response.statusCode != 200) {
+      if(json.decode(response.body) == "jwt expired"){
+        throw TokenNotValidException();
+      }
+      throw HttpException(response.body);
+    }
+    return true;
+  }
 }
 
 class TokenNotValidException implements Exception {}
-

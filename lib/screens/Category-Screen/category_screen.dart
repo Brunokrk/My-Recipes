@@ -45,13 +45,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-                refresh();
-              },
-              icon: const Icon(Icons.refresh))
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () {
+        //         refresh();
+        //       },
+        //       icon: const Icon(Icons.refresh))
+        // ],
       ),
       body: (userId != null && userToken != null)
           ? ListView(

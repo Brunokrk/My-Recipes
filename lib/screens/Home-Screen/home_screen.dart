@@ -34,13 +34,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          IconButton(
-              onPressed: () {
-                refresh();
-              },
-              icon: const Icon(Icons.refresh))
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () {
+        //         refresh();
+        //       },
+        //       icon: const Icon(Icons.refresh))
+        // ],
         title: const Text(
           "My Categories",
           style: TextStyle(

@@ -1,4 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:my_recipes_app/common/remove_confirmation_dialog.dart';
+import 'package:my_recipes_app/services/category_service.dart';
+import '../../../common/exception_dialog.dart';
+import '../../../common/logout.dart';
 import '../../../models/category.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -15,18 +21,20 @@ class CategoryCard extends StatelessWidget {
     required this.token,
   }) : super(key: key);
 
-  //TODO: Altura do card está dimensionada a partir do tamanho da imagem.
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
+        onLongPress: () {
+          removeCategory(context);
+        },
         onTap: () {
           onCardTap(context, category);
-        },  // Adicione aqui a ação desejada para quando o card for tocado.
+        }, // Adicione aqui a ação desejada para quando o card for tocado.
         child: Card(
-          color: Colors.grey[200],  // Definindo a cor de fundo do card como branco
+          color: Colors.grey[200],
+          // Definindo a cor de fundo do card como branco
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
@@ -60,7 +68,8 @@ class CategoryCard extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,  // Definindo a cor do texto como preto
+                          color: Colors
+                              .black, // Definindo a cor do texto como preto
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -73,11 +82,12 @@ class CategoryCard extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(Icons.edit, color: Colors.grey),
                   onPressed: () {
-                    Map<String, dynamic> map ={};
+                    Map<String, dynamic> map = {};
                     map["category"] = category;
-                    Navigator.pushNamed(context, 'add-category', arguments: map).then((value){
+                    Navigator.pushNamed(context, 'add-category', arguments: map)
+                        .then((value) {
                       refreshFunction();
-                      if(value!=null && value == true){
+                      if (value != null && value == true) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text("Alteração Feita com Sucesso!"),
@@ -95,11 +105,42 @@ class CategoryCard extends StatelessWidget {
     );
   }
 
-  onCardTap(BuildContext context, Category category){
+  onCardTap(BuildContext context, Category category) {
     Map<String, dynamic> map = {};
     map['category'] = category;
     Navigator.pushNamed(context, 'category-screen', arguments: map);
   }
 
-//TODO: Remove Category -> Envolve remover também todas as receitas!!!
+  removeCategory(BuildContext context) {
+    CategoryService service = CategoryService();
+    if (category != null) {
+      print("Oi");
+      showConfirmationDialog(context,
+              content:
+                  "Deseja realmente exlcuir a categoria ${category.name}? Isso exlcuirá também todas as receitas vinculadas á categoria",
+              affirmativeOption: "Excluir",
+              textStyle: TextStyle(color: Colors.black))
+          .then((value) {
+        print("value");
+        if (value != null) {
+          if (value) {
+            service.delete(userId.toString(), category, token).then((value) {
+              if (value) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text("Item deletado com sucesso")));
+                refreshFunction();
+              }
+            });
+          }
+        }
+      }).catchError(
+        (error) {
+          logout(context);
+        },
+        test: (error) => error is TokenNotValidException,
+      ).catchError((error) {
+        showExceptionDialog(context, content: error.message);
+      }, test: (error) => error is HttpException);
+    }
+  }
 }

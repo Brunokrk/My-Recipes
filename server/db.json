@@ -13,60 +13,39 @@
   ],
   "categories": [
     {
-      "id": "fa310560-00d7-11ef-9f9f-d98ade6570e4",
-      "name": "Testando Alteracao 2",
-      "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
-      "userId": 1
-    },
-    {
-      "id": "6dd70a00-00d8-11ef-9109-41b40824dd23",
-      "name": "Testando Registro 2",
-      "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
-      "userId": 1
-    },
-    {
       "id": "569540e0-00d9-11ef-9109-41b40824dd23",
       "name": "Categoria User 2",
       "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
       "userId": 2
     },
     {
-      "id": "79f69d80-00e9-11ef-a3db-e5e4627215f9",
-      "name": "Bolinhos",
-      "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
+      "id": "e923f6c0-0414-11ef-8a23-e33bbf25ce01",
+      "name": "Bolos",
+      "urlPhoto": "https://tse2.mm.bing.net/th/id/OIG1.3oBsHEXgqc5kbp4QzACE?pid=ImgGn",
       "userId": 1
     },
     {
-      "id": "57aeb770-00ea-11ef-b125-892d26638e2b",
-      "name": "Teste ScaffMess and Updt",
-      "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
+      "id": "0d7991b0-0415-11ef-8a23-e33bbf25ce01",
+      "name": "Pastéis",
+      "urlPhoto": "https://tse1.mm.bing.net/th/id/OIG1.dKGHrBA_.qjlTIp2Dprb?pid=ImgGn",
       "userId": 1
     },
     {
-      "id": "71240cf0-00ea-11ef-b125-892d26638e2b",
-      "name": "Teste Refresh()",
-      "urlPhoto": "https://moinhoglobo.com.br/wp-content/uploads/2019/10/13-donuts-1024x681.jpg",
+      "id": "30c3b010-0415-11ef-8a23-e33bbf25ce01",
+      "name": "Lasanhas",
+      "urlPhoto": "https://tse4.mm.bing.net/th/id/OIG2.BdoK5I7zwOOcCbUsZ2pn?pid=ImgGn",
       "userId": 1
     }
   ],
   "recipes": [
     {
-      "id": "71e61e20-028f-11ef-8856-bfa19905fa5d",
-      "name": "Bolo de Laranja",
-      "photoUrl": "https://static.itdg.com.br/images/640-400/6ad512da7842a03c4e0a96c97f6fb5fb/323851-original.jpg",
-      "description": "Bata tudo no liquidificador\nPasse para uma tigela\nLeve para assar em uma forma com um furo\n Bata tudo no liquidificador\nPasse para uma tigela\nLeve para assar em uma forma com um furo\nBata tudo no liquidificador\nPasse para uma tigela\nLeve para assar em uma forma com um furo\nBata tudo no liquidificador\nPasse para uma tigela\nLeve para assar em uma forma com um furo\nBata tudo no liquidificador\nPasse para uma tigela\nLeve para assar em uma forma com um furo\nBata tudo no liquidificador\nPasse para uma tigela\nLeve para assar em uma forma com um furo\nBata tudo no liquidificador\nPasse para uma tigela\nLeve para assar em uma forma com um furo",
-      "catId": "79f69d80-00e9-11ef-a3db-e5e4627215f9",
+      "id": "528a9460-0416-11ef-8a23-e33bbf25ce01",
+      "name": "Bolinho de Cenoura",
+      "photoUrl": "https://bakeandcakegourmet.com.br/uploads/site/receitas/bolo-de-cenoura-sem-gluten-ghqgbkkh.jpg",
+      "description": "Em um Liquidificador, adicione a cenoura, os ovos e o óleo, depois misture.\nAcrescente o açúcar e bata novamente por 5 minutos\nEm uma tigela ou na batedeira, adicione a farinha de trigo e depois misture novamente.\nAcrescente o fermento e misture lentamente com uma colher.\nAsse em um forno preaquecido a 180° C por aproximadamente 40 minutos",
+      "catId": "e923f6c0-0414-11ef-8a23-e33bbf25ce01",
       "userId": 1,
-      "ingredients": "4 ovos\nOleo\nCasca de 1 laranja\n1 colher de sopa de fermento\nSuco de 2 laranjas\nFarinha de Trigo"
-    },
-    {
-      "id": "72000750-0356-11ef-963e-81567b091e5b",
-      "name": "Bolo de Limaozin",
-      "photoUrl": "https://receitinhas.com.br/wp-content/uploads/2022/03/Bolo-de-limao-de-liquidificador-730x365.webp",
-      "description": "Bata no Liquidificador Tudo\nAdicione o suco a farinha e as raspas\nAdicione o fermento\nColoque no forno",
-      "catId": "79f69d80-00e9-11ef-a3db-e5e4627215f9",
-      "userId": 1,
-      "ingredients": "3 ovos\n2 xicaras de acucar\nFarinha de trigo\n1 colher de fermento em po\nRaspas de 1 limao"
+      "ingredients": "1 Litro de Amor\n3 Litros de Carinho\n4 ovos\n3 cenouras\n1 colher de sopa de fermento\n3 colheres de sopa de chocolate\n1 tablete de manteiga"
     }
   ]
 }
