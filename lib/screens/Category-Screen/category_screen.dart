@@ -48,7 +48,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                //TODO: refresh();
+                refresh();
               },
               icon: const Icon(Icons.refresh))
         ],
@@ -57,20 +57,23 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ? ListView(
               controller: _listScrollController,
               children: generateListRecipes(
-                  userId: userId!,
-                  token: userToken!,
-                  refreshFunction: refresh,
-                  database: database),
+                      userId: userId!,
+                      token: userToken!,
+                      refreshFunction: refresh,
+                      database: database)
+
             )
           : const Center(
               child: CircularProgressIndicator(),
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, "add-recipe").then(
+          Map<String, dynamic> map = {};
+          map["category"] = widget.innerCategory;
+          Navigator.pushNamed(context, "add-recipe", arguments: map).then(
             (value) {
               refresh();
-              if(value!=null && value == true){
+              if (value != null && value == true) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text("Registro Feito com Sucesso!"),

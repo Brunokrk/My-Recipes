@@ -5,6 +5,7 @@ import 'package:my_recipes_app/screens/Add-Recipe-Screen/add_recipe_screen.dart'
 import 'package:my_recipes_app/screens/Category-Screen/category_screen.dart';
 import 'package:my_recipes_app/screens/Home-Screen/home_screen.dart';
 import 'package:my_recipes_app/screens/Login-Screen/login_screen.dart';
+import 'package:my_recipes_app/screens/Recipe-Screen/recipe_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/category.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: const Color.fromRGBO(1, 29, 43, 1),
         // Cor principal da AppBar e outros elementos
-        scaffoldBackgroundColor: const Color.fromRGBO(52, 80, 94, 1),
+        scaffoldBackgroundColor: Colors.white,//const Color.fromRGBO(52, 80, 94, 1),
         // Cor de fundo padrão dos Scaffold
         appBarTheme: const AppBarTheme(
           elevation: 0,
@@ -98,15 +99,25 @@ class MyApp extends StatelessWidget {
             });
           }
         }else if(settings.name == "add-recipe"){
-          if(settings.arguments != null){
-            Map<String,dynamic> map = settings.arguments as Map<String, dynamic>;
+          Map<String,dynamic> map = settings.arguments as Map<String, dynamic>;
+          if(map.containsKey("recipe") && map.containsKey("category")){
             final Recipe recipe = map["recipe"] as Recipe;
+            final Category category = map["category"] as Category;
             return MaterialPageRoute(builder: (context) {
-              return AddRecipeScreen(existingRecipe: recipe,);
+              return AddRecipeScreen(existingRecipe: recipe, category: category,);
             });
           }else{
+            final Category category = map["category"] as Category;
             return MaterialPageRoute(builder: (context){
-              return AddRecipeScreen();
+              return AddRecipeScreen(category: category,);
+            });
+          }
+        }else if(settings.name == "recipe-screen"){
+          if(settings.arguments!=null){
+            Map<String, dynamic>map = settings.arguments as Map<String, dynamic>;
+            final Recipe recipe = map["recipe"] as Recipe;
+            return MaterialPageRoute(builder: (context){
+              return RecipeScreen(recipe: recipe);
             });
           }
         }
