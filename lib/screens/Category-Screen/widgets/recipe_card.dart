@@ -24,11 +24,11 @@ class RecipeCard extends StatelessWidget {
           onCardTap(context, recipe); // Abre a receita para visualização
         },
         child: Card(
-          color: Colors.grey[200],  // Cor de fundo do card
+          color: Colors.grey[200], // Cor de fundo do card
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),  // Bordas arredondadas
+            borderRadius: BorderRadius.circular(20.0), // Bordas arredondadas
           ),
-          elevation: 5.0,  // Elevação para dar um efeito de sombra
+          elevation: 5.0, // Elevação para dar um efeito de sombra
           child: Row(
             children: [
               Expanded(
@@ -67,7 +67,8 @@ class RecipeCard extends StatelessWidget {
                         recipe.description,
                         style: TextStyle(
                           fontSize: 14.0,
-                          color: Colors.black.withOpacity(0.6),  // Opacidade reduzida
+                          color: Colors.black
+                              .withOpacity(0.6), // Opacidade reduzida
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
@@ -81,7 +82,17 @@ class RecipeCard extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(Icons.edit, color: Colors.grey),
                   onPressed: () {
-                    //TODO: update recipe
+                    Map<String, dynamic> map = {};
+                    map["recipe"] = recipe;
+                    Navigator.pushNamed(context, 'add-recipe', arguments: map)
+                        .then((value) {
+                      refreshFunction();
+                      if (value != null && value == true) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Alteração feita com Sucesso!")));
+                      }
+                    });
                   },
                 ),
               ),

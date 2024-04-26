@@ -189,7 +189,7 @@ class AddRecipeScreen extends StatelessWidget {
             showExceptionDialog(context, content: error.message);
           }, test: (error) => error is HttpException);
         }else{
-          //TODO: update
+          service.update(recipe.id, recipe, token).then((response){Navigator.pop(context, response);},);
         }
       }
     });

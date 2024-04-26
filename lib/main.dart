@@ -100,11 +100,10 @@ class MyApp extends StatelessWidget {
           }
         }else if(settings.name == "add-recipe"){
           Map<String,dynamic> map = settings.arguments as Map<String, dynamic>;
-          if(map.containsKey("recipe") && map.containsKey("category")){
+          if(map.containsKey("recipe")){
             final Recipe recipe = map["recipe"] as Recipe;
-            final Category category = map["category"] as Category;
             return MaterialPageRoute(builder: (context) {
-              return AddRecipeScreen(existingRecipe: recipe, category: category,);
+              return AddRecipeScreen(existingRecipe: recipe,);
             });
           }else{
             final Category category = map["category"] as Category;

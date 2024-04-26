@@ -16,7 +16,6 @@ class RecipeService {
     return "$url$resource";
   }
 
-  //TODO: register
   Future<bool> register(Category category, Recipe recipe, String token) async {
     String jsonRecipe = json.encode(recipe.toMap());
     http.Response response = await client.post(
@@ -35,7 +34,6 @@ class RecipeService {
     return true;
   }
 
-//TODO: getAll
   Future<List<Recipe>> getAll({required String userId, required String token, required Category cat}) async{
     //filtra por categoria
     http.Response response = await client.get(
@@ -59,7 +57,26 @@ class RecipeService {
     return list;
   }
 
-//TODO: update
+Future<bool> update(String id, Recipe recipe, String token) async{
+    String jsonRec = json.encode(recipe.toMap());
+    http.Response response = await client.put(
+      Uri.parse("${getUrl()}$id"),
+      headers: {'Content-Type': 'application/json',
+        "Authorization": "Bearer $token",},
+      body: jsonRec,
+    );
+
+    if(response.statusCode !=200){
+      if(json.decode(response.body) == "jwt expired"){
+        throw TokenNotValidException();
+      }
+      throw HttpException(response.body);
+    }
+
+    return true;
+}
+
+
 //TODO: delete
 }
 
