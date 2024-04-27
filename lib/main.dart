@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_recipes_app/screens/Add-Category-Screen/add_category_screen.dart';
 import 'package:my_recipes_app/screens/Add-Recipe-Screen/add_recipe_screen.dart';
@@ -11,9 +12,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'models/category.dart';
 import 'models/recipe.dart';
 
-void main() async {
+Future<void>main() async {
   WidgetsFlutterBinding.ensureInitialized();
   bool isLogged = await verifyToken();
+  await dotenv.load(fileName: ".env");
   runApp(MyApp(isLogged: isLogged));
 }
 

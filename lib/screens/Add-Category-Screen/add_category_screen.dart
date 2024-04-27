@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:my_recipes_app/services/category_service.dart';
+import 'package:my_recipes_app/services/image_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
@@ -93,6 +94,20 @@ class AddCategoryScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    fetchAndSetImageUrl(context);
+                  }, // Adicione sua função de envio aqui
+                  child: const Text(
+                    "Search For an Image",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
                   child: ElevatedButton(
@@ -109,6 +124,7 @@ class AddCategoryScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+
               ],
             ),
           ),
@@ -147,4 +163,18 @@ class AddCategoryScreen extends StatelessWidget {
       },
     );
   }
+
+  void fetchAndSetImageUrl(BuildContext context) {
+    if (_name.text.isEmpty) {
+      showExceptionDialog(context, content: 'Por favor, insira o nome da categoria para buscar uma imagem.');
+      return;
+    }
+    ImageService imageService = ImageService();
+    imageService.fetchImage(_name.text).then((imageUrl) {
+      _url.text = imageUrl; // Atualiza o campo do URL automaticamente
+    }).catchError((error) {
+      showExceptionDialog(context, content: 'Falha ao buscar imagem: ${error.toString()}');
+    });
+  }
+
 }
