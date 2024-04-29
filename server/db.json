@@ -23,6 +23,12 @@
       "name": "Burgers",
       "urlPhoto": "https://images.pexels.com/photos/1639565/pexels-photo-1639565.jpeg?auto=compress&cs=tinysrgb&h=350",
       "userId": 1
+    },
+    {
+      "id": "ecfe6c70-0672-11ef-a3f7-05666b95f01c",
+      "name": "Pizzas",
+      "urlPhoto": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&h=350",
+      "userId": 1
     }
   ],
   "recipes": [
@@ -34,6 +40,24 @@
       "catId": "90ed3a50-066e-11ef-a3f7-05666b95f01c",
       "userId": 1,
       "ingredients": "\n    ½ tbsp olive oil\n    1 onion, peeled and finely chopped\n    1 x 500g pack British Beef Steak Mince 15% fat\n    1 tsp mixed dried herbs\n    1 egg, beaten\n    4 slices mature Cheddar (optional)\n    4 white rolls\n    few round lettuce leaves, torn\n    1 beef tomato, sliced\n    ketchup, to serve (optional)\n"
+    },
+    {
+      "id": "fa17aec0-066e-11ef-a3f7-05666b93123f01c",
+      "name": "Chicken Burger",
+      "photoUrl": "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&h=350",
+      "description": "\n    Heat the olive oil in a frying pan, add the onion and cook for 5 minutes until softened and starting to turn golden. Set aside.\n    In a bowl, combine the beef mince with the herbs and the egg. Season, add the onions and mix well. Using your hands, shape into 4 patties.\n    Cook the burgers on a preheated barbecue or griddle for 5-6 minutes on each side. While the second side is cooking, lay a slice of cheese on top to melt slightly (if using).\n    Meanwhile, lightly toast the cut-sides of the buns on the barbecue. Fill with the lettuce, burgers and tomato slices. Serve with ketchup, if you like.\n",
+      "catId": "90ed3a50-066e-11ef-a3f7-05666b95f01c",
+      "userId": 1,
+      "ingredients": "\n    ½ tbsp olive oil\n    1 onion, peeled and finely chopped\n    1 x 500g pack British Beef Steak Mince 15% fat\n    1 tsp mixed dried herbs\n    1 egg, beaten\n    4 slices mature Cheddar (optional)\n    4 white rolls\n    few round lettuce leaves, torn\n    1 beef tomato, sliced\n    ketchup, to serve (optional)\n"
+    },
+    {
+      "id": "00e3ceb0-0673-11ef-a3f7-05666b95f01c",
+      "name": "Margherita Pizza",
+      "photoUrl": "https://images.pexels.com/photos/6605214/pexels-photo-6605214.jpeg?auto=compress&cs=tinysrgb&h=350",
+      "description": "\nSTEP 1\nMake the base: Put the flour into a large bowl, then stir in the yeast and salt. Make a well, pour in 200ml warm water and the olive oil and bring together with a wooden spoon until you have a soft, fairly wet dough. Turn onto a lightly floured surface and knead for 5 mins until smooth. Cover with a tea towel and set aside. You can leave the dough to rise if you like, but it’s not essential for a thin crust.STEP 2\n\nSTEP 2\nMake the sauce: Mix the passata, basil and crushed garlic together, then season to taste. Leave to stand at room temperature while you get on with shaping the base.\n\nSTEP 3\nRoll out the dough: if you’ve let the dough rise, give it a quick knead, then split into two balls. On a floured surface, roll out the dough into large rounds, about 25cm across, using a rolling pin. The dough needs to be very thin as it will rise in the oven. Lift the rounds onto two floured baking sheets.\n\nSTEP 4\nTop and bake: heat the oven to 240C/220C fan/gas 8. Put another baking sheet or an u",
+      "catId": "ecfe6c70-0672-11ef-a3f7-05666b95f01c",
+      "userId": 1,
+      "ingredients": "For the base\n\n    300g strong bread flour\n    1 tsp instant yeast (from a sachet or a tub)\n    1 tsp salt\n    1 tbsp olive oil, plus extra for drizzling\n\nFor the tomato sauce\n\n    100ml passata\n    handful fresh basil or 1 tsp dried\n    1 garlic clove, crushed\n\nFor the topping\n\n    125g ball mozzarella, sliced\n    handful grated or shaved parmesan (or vegetarian alternative)\n    handful of cherry tomatoes, halved \n\n"
     }
   ]
 }

@@ -66,7 +66,7 @@ class RecipeScreen extends StatelessWidget {
                         children: [
                           Center(
                             child: Text(
-                              "Ingredientes",
+                              "Ingredients",
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
@@ -101,7 +101,7 @@ class RecipeScreen extends StatelessWidget {
                         children: [
                           Center(
                             child: Text(
-                              "Modo de Preparo",
+                              "Method",
                               style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,

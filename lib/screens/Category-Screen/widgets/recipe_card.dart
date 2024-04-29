@@ -35,7 +35,7 @@ class RecipeCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          elevation: 5.0, 
+          elevation: 5.0,
           child: Row(
             children: [
               Expanded(
@@ -130,7 +130,7 @@ class RecipeCard extends StatelessWidget {
             service.delete(recipe.id, recipe, token).then((value) {
               if (value) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Item deletado com sucesso")));
+                    const SnackBar(content: Text("Item deleted successfully")));
                 refreshFunction();
               }
             });
