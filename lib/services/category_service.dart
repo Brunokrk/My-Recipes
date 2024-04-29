@@ -105,7 +105,5 @@ class CategoryService {
     }
     return true;
   }
-
 }
-
 class TokenNotValidException implements Exception {}

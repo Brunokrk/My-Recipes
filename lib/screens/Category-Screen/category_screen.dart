@@ -45,43 +45,44 @@ class _CategoryScreenState extends State<CategoryScreen> {
           ),
         ),
         centerTitle: true,
-        // actions: [
-        //   IconButton(
-        //       onPressed: () {
-        //         refresh();
-        //       },
-        //       icon: const Icon(Icons.refresh))
-        // ],
       ),
       body: (userId != null && userToken != null)
-          ? ListView(
-              controller: _listScrollController,
-              children: generateListRecipes(
-                      userId: userId!,
-                      token: userToken!,
-                      refreshFunction: refresh,
-                      database: database)
-
-            )
+          ? database.isEmpty
+          ? Center(
+        child: Text(
+          "There are no recipes in this category yet!",
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black54,
+          ),
+        ),
+      )
+          : ListView(
+        controller: _listScrollController,
+        children: generateListRecipes(
+          userId: userId!,
+          token: userToken!,
+          refreshFunction: refresh,
+          database: database,
+        ),
+      )
           : const Center(
-              child: CircularProgressIndicator(),
-            ),
+        child: CircularProgressIndicator(),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Map<String, dynamic> map = {};
-          map["category"] = widget.innerCategory;
-          Navigator.pushNamed(context, "add-recipe", arguments: map).then(
-            (value) {
-              refresh();
-              if (value != null && value == true) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Registro Feito com Sucesso!"),
-                  ),
-                );
-              }
-            },
-          );
+          Map<String, dynamic> map = {'category': widget.innerCategory};
+          Navigator.pushNamed(context, 'add-recipe', arguments: map).then((value) {
+            refresh();
+            if (value != null && value == true) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Registro Feito com Sucesso!"),
+                ),
+              );
+            }
+          });
         },
         backgroundColor: const Color(0xFFDC6425),
         child: const Icon(

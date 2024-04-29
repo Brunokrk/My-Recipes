@@ -31,10 +31,9 @@ class CategoryCard extends StatelessWidget {
         },
         onTap: () {
           onCardTap(context, category);
-        }, // Adicione aqui a ação desejada para quando o card for tocado.
+        },
         child: Card(
           color: Colors.grey[200],
-          // Definindo a cor de fundo do card como branco
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
@@ -44,7 +43,7 @@ class CategoryCard extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(20.0),
                     bottomLeft: Radius.circular(20.0),
                   ),
@@ -65,11 +64,11 @@ class CategoryCard extends StatelessWidget {
                     children: [
                       Text(
                         category.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                           color: Colors
-                              .black, // Definindo a cor do texto como preto
+                              .black,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -80,7 +79,7 @@ class CategoryCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: IconButton(
-                  icon: Icon(Icons.edit, color: Colors.grey),
+                  icon: const Icon(Icons.edit, color: Colors.grey),
                   onPressed: () {
                     Map<String, dynamic> map = {};
                     map["category"] = category;
@@ -113,34 +112,30 @@ class CategoryCard extends StatelessWidget {
 
   removeCategory(BuildContext context) {
     CategoryService service = CategoryService();
-    if (category != null) {
-      print("Oi");
-      showConfirmationDialog(context,
-              content:
-                  "Deseja realmente exlcuir a categoria ${category.name}? Isso exlcuirá também todas as receitas vinculadas á categoria",
-              affirmativeOption: "Excluir",
-              textStyle: TextStyle(color: Colors.black))
-          .then((value) {
-        print("value");
-        if (value != null) {
-          if (value) {
-            service.delete(userId.toString(), category, token).then((value) {
-              if (value) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Item deletado com sucesso")));
-                refreshFunction();
-              }
-            });
-          }
+    showConfirmationDialog(context,
+            content:
+                "Do you really want to delete the category ${category.name}? This will also delete all recipes linked to the category",
+            affirmativeOption: "Delete",
+            textStyle: const TextStyle(color: Colors.black))
+        .then((value) {
+      if (value != null) {
+        if (value) {
+          service.delete(userId.toString(), category, token).then((value) {
+            if (value) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Item deleted successfully")));
+              refreshFunction();
+            }
+          });
         }
-      }).catchError(
-        (error) {
-          logout(context);
-        },
-        test: (error) => error is TokenNotValidException,
-      ).catchError((error) {
-        showExceptionDialog(context, content: error.message);
-      }, test: (error) => error is HttpException);
+      }
+    }).catchError(
+      (error) {
+        logout(context);
+      },
+      test: (error) => error is TokenNotValidException,
+    ).catchError((error) {
+      showExceptionDialog(context, content: error.message);
+    }, test: (error) => error is HttpException);
     }
-  }
 }

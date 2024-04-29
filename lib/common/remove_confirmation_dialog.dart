@@ -11,13 +11,13 @@ Future<bool?> showConfirmationDialog(BuildContext context, {required String cont
           TextButton(
             child: Text(affirmativeOption),
             onPressed: () {
-              Navigator.of(context).pop(true); // Retorna true quando confirmar
+              Navigator.of(context).pop(true); //  true quando confirmar
             },
           ),
           TextButton(
-            child: Text("Cancelar"),
+            child: Text("Cancel"),
             onPressed: () {
-              Navigator.of(context).pop(false); // Retorna false quando cancelar
+              Navigator.of(context).pop(false); // false quando cancelar
             },
           ),
         ],

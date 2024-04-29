@@ -35,7 +35,7 @@ class AddCategoryScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              _buildTextFormField(_name, "Nome da Categoria", Icons.fastfood),
+              _buildTextFormField(_name, "Category name", Icons.fastfood),
               const SizedBox(height: 20),
               _buildImageUrlField(context, _url),
               const SizedBox(height: 60),
@@ -72,7 +72,7 @@ class AddCategoryScreen extends StatelessWidget {
       controller: controller,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
-        labelText: "URL da Imagem",
+        labelText: "Image URL",
         labelStyle: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon: const Icon(Icons.link, color: Colors.grey),

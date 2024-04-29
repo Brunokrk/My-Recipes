@@ -28,14 +28,14 @@ class RecipeCard extends StatelessWidget {
       child: InkWell(
         onLongPress: () {removeRecipe(context);},
         onTap: () {
-          onCardTap(context, recipe); // Abre a receita para visualização
+          onCardTap(context, recipe);
         },
         child: Card(
-          color: Colors.grey[200], // Cor de fundo do card
+          color: Colors.grey[200],
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0), // Bordas arredondadas
+            borderRadius: BorderRadius.circular(20.0),
           ),
-          elevation: 5.0, // Elevação para dar um efeito de sombra
+          elevation: 5.0, 
           child: Row(
             children: [
               Expanded(
@@ -121,8 +121,8 @@ class RecipeCard extends StatelessWidget {
     if (recipe != null) {
       showConfirmationDialog(
         context,
-        content: "Deseja realmente excluir a receita de  ${recipe.name}?",
-        affirmativeOption: "Excluir",
+        content: "Do you really want to delete the recipe:  ${recipe.name}?",
+        affirmativeOption: "Delete",
         textStyle: TextStyle(color: Colors.black),
       ).then((value) {
         if (value != null) {

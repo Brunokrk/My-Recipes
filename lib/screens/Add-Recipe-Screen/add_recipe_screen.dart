@@ -38,13 +38,13 @@ class AddRecipeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              _buildTextFormField(_name, "Nome da Receita", Icons.book),
+              _buildTextFormField(_name, "Recipe Name", Icons.book),
               const SizedBox(height: 20),
               _buildImageUrlField(context, _url),
               const SizedBox(height: 20),
-              _buildTextFormField(_ingredients, "Ingredientes", Icons.list, isMultiline: true),
+              _buildTextFormField(_ingredients, "Ingredients", Icons.list, isMultiline: true),
               const SizedBox(height: 20),
-              _buildTextFormField(_preparation, "Modo de Preparo", Icons.format_align_left, isMultiline: true),
+              _buildTextFormField(_preparation, "Method of preparation", Icons.format_align_left, isMultiline: true),
               const SizedBox(height: 40),
               _buildButton(context, "Create", registerOrUpdateRecipe),
             ],
@@ -80,7 +80,7 @@ class AddRecipeScreen extends StatelessWidget {
       controller: controller,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
-        labelText: "URL da Imagem",
+        labelText: "Image URL",
         labelStyle: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 16),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         prefixIcon: const Icon(Icons.link, color: Colors.grey),
@@ -112,7 +112,7 @@ class AddRecipeScreen extends StatelessWidget {
 
   void fetchAndSetImageUrl(BuildContext context) {
     if (_name.text.isEmpty) {
-      showExceptionDialog(context, content: 'Por favor, insira o nome da receita para buscar uma imagem.');
+      showExceptionDialog(context, content: 'Please enter the recipe name to search for an image.');
       return;
     }
 
@@ -120,7 +120,7 @@ class AddRecipeScreen extends StatelessWidget {
     ImageService imageService = ImageService();
     imageService.listImages(_name.text).then((imageUrls) {
       if (imageUrls.isEmpty) {
-        showExceptionDialog(context, content: 'Nenhuma imagem encontrada para essa receita.');
+        showExceptionDialog(context, content: 'No images found for this recipe.');
         return;
       }
 
@@ -128,13 +128,13 @@ class AddRecipeScreen extends StatelessWidget {
         context: context,
         builder: (BuildContext dialogContext) {
           return AlertDialog(
-            title: const Text('Selecione uma Imagem'),
+            title: const Text('Select an Image'),
             content: SingleChildScrollView(
-              child: Container(
+              child: SizedBox(
                 width: double.maxFinite,
                 height: MediaQuery.of(context).size.height * 0.8,
                 child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: 4.0,
                     mainAxisSpacing: 4.0,
@@ -154,7 +154,7 @@ class AddRecipeScreen extends StatelessWidget {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('Fechar'),
+                child: const Text('Close'),
                 onPressed: () {
                   Navigator.of(dialogContext).pop();
                 },
@@ -164,7 +164,7 @@ class AddRecipeScreen extends StatelessWidget {
         },
       );
     }).catchError((error) {
-      showExceptionDialog(context, content: 'Falha ao buscar imagens: ${error.toString()}');
+      showExceptionDialog(context, content: 'Failed to fetch images: ${error.toString()}');
     });
   }
 

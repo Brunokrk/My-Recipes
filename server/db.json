@@ -19,48 +19,21 @@
       "userId": 2
     },
     {
-      "id": "e923f6c0-0414-11ef-8a23-e33bbf25ce01",
-      "name": "Bolos",
-      "urlPhoto": "https://tse2.mm.bing.net/th/id/OIG1.3oBsHEXgqc5kbp4QzACE?pid=ImgGn",
-      "userId": 1
-    },
-    {
-      "id": "0d7991b0-0415-11ef-8a23-e33bbf25ce01",
-      "name": "Pastéis",
-      "urlPhoto": "https://images.pexels.com/photos/15010282/pexels-photo-15010282.jpeg?auto=compress&cs=tinysrgb&h=350",
-      "userId": 1
-    },
-    {
-      "id": "30c3b010-0415-11ef-8a23-e33bbf25ce01",
-      "name": "Lasanhas",
-      "urlPhoto": "https://tse4.mm.bing.net/th/id/OIG2.BdoK5I7zwOOcCbUsZ2pn?pid=ImgGn",
-      "userId": 1
-    },
-    {
-      "id": "8ef74900-0445-11ef-adb7-4f905d8b0679",
-      "name": "Pizza",
-      "urlPhoto": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&h=350",
+      "id": "90ed3a50-066e-11ef-a3f7-05666b95f01c",
+      "name": "Burgers",
+      "urlPhoto": "https://images.pexels.com/photos/1639565/pexels-photo-1639565.jpeg?auto=compress&cs=tinysrgb&h=350",
       "userId": 1
     }
   ],
   "recipes": [
     {
-      "id": "528a9460-0416-11ef-8a23-e33bbf25ce01",
-      "name": "Bolinho de Cenoura",
-      "photoUrl": "https://bakeandcakegourmet.com.br/uploads/site/receitas/bolo-de-cenoura-sem-gluten-ghqgbkkh.jpg",
-      "description": "Em um Liquidificador, adicione a cenoura, os ovos e o óleo, depois misture.\nAcrescente o açúcar e bata novamente por 5 minutos\nEm uma tigela ou na batedeira, adicione a farinha de trigo e depois misture novamente.\nAcrescente o fermento e misture lentamente com uma colher.\nAsse em um forno preaquecido a 180° C por aproximadamente 40 minutos",
-      "catId": "e923f6c0-0414-11ef-8a23-e33bbf25ce01",
+      "id": "fa17aec0-066e-11ef-a3f7-05666b95f01c",
+      "name": "Beef Burger",
+      "photoUrl": "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&h=350",
+      "description": "\n    Heat the olive oil in a frying pan, add the onion and cook for 5 minutes until softened and starting to turn golden. Set aside.\n    In a bowl, combine the beef mince with the herbs and the egg. Season, add the onions and mix well. Using your hands, shape into 4 patties.\n    Cook the burgers on a preheated barbecue or griddle for 5-6 minutes on each side. While the second side is cooking, lay a slice of cheese on top to melt slightly (if using).\n    Meanwhile, lightly toast the cut-sides of the buns on the barbecue. Fill with the lettuce, burgers and tomato slices. Serve with ketchup, if you like.\n",
+      "catId": "90ed3a50-066e-11ef-a3f7-05666b95f01c",
       "userId": 1,
-      "ingredients": "1 Litro de Amor\n3 Litros de Carinho\n4 ovos\n3 cenouras\n1 colher de sopa de fermento\n3 colheres de sopa de chocolate\n1 tablete de manteiga"
-    },
-    {
-      "id": "92293db0-04b6-11ef-bd74-99dee4c9c395",
-      "name": "Ovo mexido",
-      "photoUrl": "https://images.pexels.com/photos/19761009/pexels-photo-19761009.jpeg?auto=compress&cs=tinysrgb&h=350",
-      "description": "Quebre os ovos em uma tigela\nColoque todos os ingrdientes na mesma tigela\nMisture tudo\nColoque na frigideira aquecida",
-      "catId": "0d7991b0-0415-11ef-8a23-e33bbf25ce01",
-      "userId": 1,
-      "ingredients": "Ovos\nSal a gosto\nRequeijão a gosto\nTomate Cereja"
+      "ingredients": "\n    ½ tbsp olive oil\n    1 onion, peeled and finely chopped\n    1 x 500g pack British Beef Steak Mince 15% fat\n    1 tsp mixed dried herbs\n    1 egg, beaten\n    4 slices mature Cheddar (optional)\n    4 white rolls\n    few round lettuce leaves, torn\n    1 beef tomato, sliced\n    ketchup, to serve (optional)\n"
     }
   ]
 }

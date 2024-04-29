@@ -34,23 +34,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // actions: [
-        //   IconButton(
-        //       onPressed: () {
-        //         refresh();
-        //       },
-        //       icon: const Icon(Icons.refresh))
-        // ],
         title: const Text(
           "My Categories",
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Colors.white, // Alterado para branco puro
+            color: Colors.white,
           ),
         ),
         backgroundColor: const Color.fromRGBO(1, 29, 43, 1),
-        centerTitle: true, // Adicionado para centralizar o título
+        centerTitle: true,
       ),
       drawer: Drawer(
         child: ListView(
@@ -66,18 +59,29 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: (userId != null && userToken != null)
-          ? ListView(
-              controller: _listScrollController,
-              children: generateListCategories(userId: userId!, token: userToken!, refreshFunction: refresh, database: database),
-            )
+          ? database.isEmpty
+          ? Center(
+        child: Text(
+          "Você ainda não criou uma categoria!",
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black54,
+          ),
+        ),
+      )
+          : ListView(
+        controller: _listScrollController,
+        children: generateListCategories(userId: userId!, token: userToken!, refreshFunction: refresh, database: database),
+      )
           : const Center(
-              child: CircularProgressIndicator(),
-            ),
+        child: CircularProgressIndicator(),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, 'add-category').then((value) {
             refresh();
-            if(value!=null && value == true){
+            if (value != null && value == true) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text("Registro Feito com Sucesso!"),
